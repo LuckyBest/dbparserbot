@@ -1,0 +1,18 @@
+{
+  "name": "tbot1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.5",
+    "dotenv": "^8.2.0",
+    "telegraf": "^4.1.1"
+  }
+}
