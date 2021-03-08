@@ -15,6 +15,6 @@
     "cheerio": "^1.0.0-rc.5",
     "dotenv": "^8.2.0",
     "faker": "^5.4.0",
-    "telegraf": "^4.1.1"
+    "telegraf": "^4.1.2"
   }
 }

@@ -4,6 +4,16 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const bot = new Telegraf(process.env.BOT_TOKEN, {polling:true});
 
+bot.start(ctx => ctx.reply(`
+Let's generate new user.
+Enter "/New User"😉
+`
+)
+);
+bot.hears('/New User', ctx => {
+    ctx.reply('Write your number below...');
+});
+
 //Men names, second names
 
 const menFirstNames =[
@@ -183,28 +193,55 @@ const getPerson = async() => {
     }
     const $ = await getHTML('https://meragor.com/profile-generator');
 
+    //Mail number generate
     function mailNumber () {
         
        return Math.floor(Math.random() * (100000 - 1) + 1);
     }
+
+    //Password generate
     function random_password_generate(max,min)
     {
         let passwordChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         let randPwLen = Math.floor(Math.random() * (max - min + 1)) + min;
         let randPassword = Array(randPwLen).fill(passwordChars).map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('');
         return randPassword;
-    }   
+    }
 
+    //Random number generate
+    function random_number_generate(max,min)
+    {
+        let passwordChars = "0123456789abcdefghijklmnopqrstuvwxyz";
+        let randPwLen = Math.floor(Math.random() * (max - min + 1)) + min;
+        let randPassword = Array(randPwLen).fill(passwordChars).map(function(x) { return x[Math.floor(Math.random() * x.length)] }).join('');
+        return randPassword;
+    }    
+
+    //Male or Female
+
+    let maleOrFemale = Math.floor(Math.random() * (10 - 1) + 1);
+
+    let name = '';
+
+    if(maleOrFemale < 5){
+
+        name = menFirstNames;
+    }
+    else{
+
+        name = womenNames;
+    }
+    // Choose names by random id 
     let NameChooseId = Math.floor(Math.random() * (50 - 1) + 1);
     let SecondNamesChooseId = Math.floor(Math.random() * (53 - 1) + 1);
         
-    const menNameGenerator = menFirstNames.find(function(menNameGenerator){
+    //Return names which is chosen by id
+    const menNameGenerator = name.find(function(menNameGenerator){
         return menNameGenerator.id === NameChooseId;
     });
     const menSecondNameGenerator = menSecondNames.find(function(menSecondNameGenerator){
         return menSecondNameGenerator.id === SecondNamesChooseId;
     });
-    
     
     //Parsed from 1st site
 
@@ -221,6 +258,8 @@ const getPerson = async() => {
         console.log('Date:',date);
         console.log('Mail:', `${menNameGenerator['nickName'].toLowerCase()}.${menSecondNameGenerator['nickName'].toLowerCase()}${mailNumber()}@yahoo.com`);
         console.log('Password:', random_password_generate(16,20));
+        
+        //Main bot message
         const a = `
 Name: 
 ${menNameGenerator['name']} ${menSecondNameGenerator['secondName']};
@@ -237,7 +276,7 @@ Date:
 ${date};
 -----------------------------------------------------------------------
 Mail: 
-${menNameGenerator['nickName'].toLowerCase()}.${menSecondNameGenerator['nickName'].toLowerCase()}${mailNumber()}@yahoo.com;
+${menNameGenerator['nickName'].toLowerCase()}.${menSecondNameGenerator['nickName'].toLowerCase()}${mailNumber()}${random_number_generate(1,8)}@yahoo.com;
 -----------------------------------------------------------------------
 Password:  
 ${random_password_generate(10,20)};
@@ -257,8 +296,6 @@ Manager:
 https://www.google.com/search?q=%D0%B1%D1%96%D0%B7%D0%BD%D0%B5%D1%81%20%D0%BC%D0%B5%D0%BD%D0%B5%D0%B4%D0%B6%D0%B5%D1%80
 -----------------------------------------------------------------------
 `;
-    
-    const reply = bot.hears('info', (ctx) => ctx.reply(a));
 
     //Checking parsed info
 
@@ -276,4 +313,3 @@ https://www.google.com/search?q=%D0%B1%D1%96%D0%B7%D0%BD%D0%B5%D1%81%20%D0%BC%D0
     process.once('SIGINT', () => bot.stop('SIGINT'));
     process.once('SIGTERM', () => bot.stop('SIGTERM'));
 })(bot, process);
-
