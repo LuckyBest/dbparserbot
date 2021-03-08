@@ -179,7 +179,7 @@ const womenNames = [
     {id : 44, name: 'Иоанна',nickName: 'Ioanna'},
     {id : 45, name: 'Ираида',nickName: 'Iraida'},
     {id : 46, name: 'Ирина',nickName: 'Irina'},
-    {id : 47, name: 'Ия',nickName: 'Ia'},
+    {id : 47, name: 'Ия',nickName: 'Iya'},
     {id : 48, name: 'Капитолина',nickName: 'Kapitolia'},
     {id : 49, name: 'Карина',nickName: 'Karina'},
     {id : 50, name: 'Кира',nickName: 'Kira'},
@@ -260,7 +260,7 @@ const getPerson = async() => {
         console.log('age:', age);
         console.log('Address:', address);
         console.log('Date:',date);
-        console.log('Mail:', `${menNameGenerator['nickName'].toLowerCase()}.${menSecondNameGenerator['nickName'].toLowerCase()}${mailNumber()}@yahoo.com`);
+        console.log('Mail:', `${menNameGenerator['nickName'].toLowerCase()}.${menSecondNameGenerator['nickName'].toLowerCase()}${mailNumber()}${random_number_generate(1,8)}@yahoo.com`);
         console.log('Password:', random_password_generate(16,20));
         
         //Main bot message
