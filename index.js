@@ -220,7 +220,6 @@ const getPerson = async() => {
     //Male or Female
 
     let maleOrFemale = Math.floor(Math.random() * (10 - 1) + 1);
-
     let name = '';
 
     if(maleOrFemale < 5){
@@ -243,6 +242,11 @@ const getPerson = async() => {
         return menSecondNameGenerator.id === SecondNamesChooseId;
     });
     
+    if(maleOrFemale >= 5){
+        menSecondNameGenerator['secondName'] = `${menSecondNameGenerator['secondName']}a`;
+        menSecondNameGenerator['nickName'] = `${menSecondNameGenerator['nickName']}a`
+    }
+
     //Parsed from 1st site
 
         const status =  $('._txt._edit-txt').eq(1).text();
