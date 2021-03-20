@@ -6,7 +6,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {polling:true});
 
 bot.start(ctx => ctx.reply(`
 Let's generate new user.
-Enter "/New User"😉
+Enter "generate"😉
 `
 )
 );
