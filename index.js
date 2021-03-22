@@ -10,8 +10,18 @@ Enter "generate"😉
 `
 )
 );
-bot.hears('/New User', ctx => {
-    ctx.reply('Write your number below...');
+bot.command('380', (ctx) => {
+    ctx.telegram.sendMessage(ctx.chat.id, 'Hello my dear Alalalala Ablalblablabla!!!!',
+    {
+        reply_markup:{
+           
+            inline_keyboard:[
+                
+                [{text : 'click', callback_data : "CL"}]
+            ]
+        }
+    }
+    );
 });
 
 //Men names, second names
@@ -222,7 +232,7 @@ const getPerson = async() => {
     let maleOrFemale = Math.floor(Math.random() * (10 - 1) + 1);
     let name = '';
 
-    if(maleOrFemale < 5){
+    if(maleOrFemale <= 5){
 
         name = menFirstNames;
     }
@@ -242,7 +252,7 @@ const getPerson = async() => {
         return menSecondNameGenerator.id === SecondNamesChooseId;
     });
     
-    if(maleOrFemale >= 5){
+    if(maleOrFemale > 5){
         menSecondNameGenerator['secondName'] = `${menSecondNameGenerator['secondName']}a`;
         menSecondNameGenerator['nickName'] = `${menSecondNameGenerator['nickName']}a`
     }
